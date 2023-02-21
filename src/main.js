@@ -1,28 +1,48 @@
-import { render } from "../lib"
+import {  render, router } from "../lib"
 import HomePage from "./pages/home"
-import Navigo from "navigo"
 import './style/main.css'
 import Detail from "./pages/detail"
-
+import Cart from "./pages/cart"
+import Login from "./pages/login"
+import Dashboard from "./pages/admin/dashboard"
+import ManaProducts from "./pages/admin/ManaProducts"
+import UpdateProduct from "./pages/admin/updateProduct"
+import ManaUser from "./pages/admin/manaUser"
+import UpdateUser from "./pages/admin/updateUser"
 // Khai bao DOM
 var app = document.querySelector("#app")
-
 // app.innerHTML = ProductPage()
-
-
-const router = new Navigo()
 router.on('/', function() {
-    console.log("home page");
-    render(HomePage(), app)
+    render(HomePage, app)
 })
-
-router.on('/detail/:id', function() {
+router.on('/home', function() {
+    render(HomePage, app)
+})
+router.on('/login', function() {
+    render(Login, app)
+})
+router.on('/detail/:id', function({data}) {
     console.log("Product page");
-    render(Detail(), app)
+    render(()=>Detail(data.id), app)
 })
-// router.on("/detail/:id", ()=>{
-//     render(DetailPage(),app)
-// })
+router.on('/cart', function() {
+    render(Cart, app)
+})
+router.on('/admin', function() {
+    render(Dashboard, app)
+})
+router.on('/admin/products', function() {
+    render(ManaProducts, app)
+})
+router.on('/admin/products/:id', function({data}) {
+    render(()=>UpdateProduct(data.id), app)
+})
+router.on('/admin/users', function({data}) {
+    render(ManaUser, app)
+})
+router.on('/admin/users/:id', function({data}) {
+    render(()=>UpdateUser(data.id), app)
+})
 
 router.resolve()
 

@@ -19,7 +19,16 @@ module.exports = {
       fontSize: {
         normal: '12px',
         title: '23px'
-      }
+      },
+      animation: {
+        loading : 'loading 1s forwards infinite'
+      },
+      keyframes:{
+        loading:{
+          '0%': {width: '0'},
+          '100%': {width: '100%'},
+        }
+      },
     },
   },
   plugins: [],
